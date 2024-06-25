@@ -1,10 +1,9 @@
-// BookmarkButton.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const BookmarkButton = ({ story, onToggleFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // Kiểm tra xem story đã được bookmark hoặc favorite chưa
+  // Kiểm tra xem story đã được đánh dấu là yêu thích hay chưa
   const checkIsFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     return favorites.some(item => item.id === story.id);
@@ -17,24 +16,26 @@ const BookmarkButton = ({ story, onToggleFavorite }) => {
       favorites = favorites.filter(item => item.id !== story.id);
       setIsFavorite(false);
     } else {
-      favorites.push({ id: story.id, title: story.title });
+      favorites.push({ id: story.id, name: story.name });
       setIsFavorite(true);
     }
 
     localStorage.setItem('favorites', JSON.stringify(favorites));
 
-    // Gọi hàm callback để thông báo cho App component biết rằng có sự thay đổi yêu thích
-    onToggleFavorite();
+    // Gọi hàm callback để thông báo ra ngoài rằng có sự thay đổi trong yêu thích
+    if (typeof onToggleFavorite === 'function') {
+      onToggleFavorite();
+    }
   };
 
   // Cập nhật trạng thái yêu thích khi component được render
-  useState(() => {
+  useEffect(() => {
     setIsFavorite(checkIsFavorite());
   }, []);
 
   return (
     <button onClick={handleFavorite}>
-      {isFavorite ? 'Remove Favorite' : 'Add Favorite'}
+      {isFavorite ? 'Xóa khỏi yêu thích' : 'Thêm vào yêu thích'}
     </button>
   );
 };

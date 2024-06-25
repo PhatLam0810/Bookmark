@@ -1,0 +1,33 @@
+.favorite-list-container {
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 700px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+  }
+  
+  .favorite-list-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .favorite-item {
+    list-style-type: none;
+    margin-bottom: 8px;
+  }
+  
+  .favorite-item button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .favorite-item button:hover {
+    background-color: #c82333;
+  }
+  
